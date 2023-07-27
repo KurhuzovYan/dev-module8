@@ -18,7 +18,7 @@ public class TimezoneValidateFilter extends HttpFilter {
     @Override
     protected void doFilter(HttpServletRequest req, HttpServletResponse res, FilterChain chain) throws IOException, ServletException {
         if (req.getParameter("timezone") != null) {
-            String timezone = req.getParameter("timezone").replace(" ", "+");
+            String timezone = req.getParameter("timezone");
             if (timezone.contains("UTC")) {
                 final String result = timezone;
                 timezone = timezone.replace("UTC", "Etc/GMT");
@@ -31,7 +31,7 @@ public class TimezoneValidateFilter extends HttpFilter {
                 getResponse(res, "Please enter correct UTC timezone");
             }
         } else {
-            getResponse(res, "Please enter your timezone");
+            chain.doFilter(req, res);
         }
     }
 

@@ -25,7 +25,7 @@ public class TimeServlet extends HttpServlet {
             calendar.setTime(new Date());
             calendar.add(Calendar.HOUR_OF_DAY, timezone);
             format = f.format(calendar.getTime());
-            String replace = req.getParameter("timezone").replace(" ", "+");
+            String replace = req.getParameter("timezone");
             format = format.replace("UTC", replace);
         }
         resp.setContentType("text/html; charset=utf-8");
